@@ -1,7 +1,7 @@
 pipeline {
   agent { dockerfile { label 'docker' } }
   parameters {
-    string defaultValue: '${ghprbActualCommit}', description: 'Commit to biuld', name: 'REF', trim: true
+    string defaultValue: '\${ghprbActualCommit}', description: 'Commit to biuld', name: 'REF', trim: true
   }
   stages {
     stage('Compile') {
