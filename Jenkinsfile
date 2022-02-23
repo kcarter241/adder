@@ -1,8 +1,7 @@
 pipeline {
-  agent {
-    dockerfile {
-      label 'docker'
-    }
+  agent { dockerfile { label 'docker' } }
+  parameters {
+    string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
   }
   stages {
     stage('Compile') {
@@ -21,6 +20,11 @@ pipeline {
               -v --junitxml=junit.xml \
               --cov-report xml --cov adder adder.py
         '''
+      }
+    }
+    stage('Hello GitHub') {
+      steps {
+	echo 'Hello GitHub!'
       }
     }
   }
