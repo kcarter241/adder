@@ -1,37 +1,42 @@
 pipeline {
-  agent { dockerfile { label 'docker' } }
-  parameters {
-    string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
-  }
-  stages {
-    stage('Compile') {
-      steps {
-        sh 'python3 -m compileall adder.py'
-      }
+    agent {
+        dockerfile {
+            label 'docker'
+        }
     }
-    stage('RUN') {
-      steps {
-        sh 'python3 adder.py 3 5'
-      }
+    parameters {
+        string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
     }
-    stage('Unit test') {
-      steps {
-        sh '''python3 -m pytest \
-              -v --junitxml=junit.xml \
-              --cov-report xml --cov adder adder.py
-        '''
-      }
+    stages {
+        stage('Hello GitHub') {
+            steps {
+                echo "Hello GitHub!"
+            }
+        }
+        stage('Compile') {
+            steps {
+                sh 'python3 -m compileall adder.py'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'python3 adder.py 3 5'
+            }
+        }
+        stage('Unit test') {
+            steps {
+                sh '''python3 -m pytest \
+                    -v --junitxml=junit.xml \
+                    --cov-report xml --cov adder adder.py
+                '''
+            }
+        }
     }
-    stage('Hello GitHub') {
-      steps {
-	echo 'Hello GitHub!'
-      }
+    post {
+        always {
+            junit 'junit.xml'
+            cobertura coberturaReportFile: 'coverage.xml'
+        }
     }
-  }
-  post {
-    always {
-      junit 'junit.xml'
-      cobertura coberturaReportFile: 'coverage.xml'
-    }
-  }
 }
+
