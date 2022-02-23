@@ -1,8 +1,5 @@
 pipeline {
   agent { dockerfile { label 'docker' } }
-  parameters {
-    string defaultValue: 'main', description: 'Commit to biuld', name: 'REF', trim: true
-  }
   stages {
     stage('Compile') {
       steps {
