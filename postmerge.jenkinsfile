@@ -23,7 +23,7 @@ pipeline {
           echo "Next version is ${version_g}"
           sh "echo -n ${version_g} > version_f"
         }
-      }
+      } }
       stage('Get Docker group') {
         agent { label 'vagrant-agent' }
         steps {
@@ -79,7 +79,6 @@ pipeline {
           }
         }
       }
-    }
   }
   post {
     always {
