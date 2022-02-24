@@ -25,7 +25,7 @@ pipeline {
         }
       } }
       stage('Get Docker group') {
-        agent { label 'vagrant-agent' }
+        agent { label 'docker' }
         steps {
           script {
             docker_group = sh (
@@ -88,3 +88,4 @@ pipeline {
     }
   }
 }
+
