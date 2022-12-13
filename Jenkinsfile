@@ -6,6 +6,11 @@ pipeline {
 		}
 	}
 	stages {
+		stage('Hello Github') {
+			steps {
+				echo 'Hello Github!'
+			}
+		}
 		stage('Compile') {
 			steps {
 				sh 'python3 -m compileall adder.py'
