@@ -5,7 +5,15 @@ pipeline {
 			// image 'python:3'
 		}
 	}
+	parameters {
+		string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
+	}
 	stages {
+		stage('Hello Github') {
+			steps {
+				echo 'Hello Github!'
+			}
+		}
 		stage('Compile') {
 			steps {
 				sh 'python3 -m compileall adder.py'
