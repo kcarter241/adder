@@ -5,6 +5,9 @@ pipeline {
 			// image 'python:3'
 		}
 	}
+	parameters {
+		string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
+	}
 	stages {
 		stage('Hello Github') {
 			steps {
