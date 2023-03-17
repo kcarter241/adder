@@ -80,12 +80,12 @@ pipeline {
         }
       }
   }
-  post {
-    always {
-      script {
-        currentBuild.description = version_g
-      }
-    }
-  }
+  // post {
+  //   always {
+  //     script {
+  //       currentBuild.description = version_g
+  //     }
+  //   }
+  // }
 }
 
