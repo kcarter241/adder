@@ -83,7 +83,7 @@ pipeline {
   post {
     always {
       script {
-        currentBuild.description = "\${version_g}"
+        currentBuild.description = "test"
       }
     }
   }
